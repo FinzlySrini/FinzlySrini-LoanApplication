@@ -11,6 +11,7 @@ import { HttpService } from '../http.service';
 export class DisplayPaymentScheduleComponent implements OnInit {
   PaymentSchedule:any=[];
   p:number=1;
+  isDisable:boolean=false;
   
   constructor(private service:HttpService,
               private route:ActivatedRoute,
@@ -33,19 +34,22 @@ getPaymentSchedules(){
 }
 
 onBack(){
-  this.router.navigate(['/displayLoans'])
+  this.router.navigate(['/allLoans'])
   }
 
 onPay(paymentId:any){
+
 this.service.paymentStatus(paymentId)
 .subscribe((res)=>{
-if(confirm("Do you want to pay?")){
-  this.toaster.success(res,"Success!");
- location.reload();
-}
-else{
-  this.toaster.warning("Payment has Cancelled")
-}
+  if(confirm("Do you want to Pay?")){
+this.toaster.success(res,"Payment Success!");
+this.isDisable=false;
+location.reload();
+
+  }
+  else{
+this.toaster.warning("Payment has been cancelled","Payment Cancelled")
+  }
 })
 }
 

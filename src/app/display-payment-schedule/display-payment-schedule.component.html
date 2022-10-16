@@ -1,4 +1,4 @@
-&nbsp; &nbsp; <button class="back" role="button" (click)="onBack()">Back</button>
+
 
 <table class="table table-bordered table-hover" >
     <thead class="table-primary">
@@ -23,16 +23,14 @@
           'badge-success':item.paymentStatus==='PAID',
           'badge-danger':item.paymentStatus==='AWAITINGPAYMENT',
           'badge-warning':item.paymentStatus==='PROJECTED'
-        }" style="padding: 8px;">{{item.paymentStatus}}</span></td>
+        }" style="padding: 5px;">{{item.paymentStatus}}</span></td>
         <td> {{item.principalAmount}} </td>
         <td> {{item.projectedInterest}} </td>
         <td><button (click)="onPay(item.paymentId)" class="btn btn-success"
-          [disabled]='!(item.paymentStatus === "AWAITINGPAYMENT")'>Pay</button></td>
+         [disabled]='(item.paymentStatus === "PAID")'>Pay</button></td>
         <td></td>
       </tr>
     </tbody>
   </table>   
+  &nbsp; &nbsp; <button class="back" role="button" (click)="onBack()">Back</button>
   <pagination-controls (pageChange)="p = $event" style="float:right ;"></pagination-controls>
-
-
- 

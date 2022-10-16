@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <table class="table table-bordered table-hover" >
+        <thead class="table-success">
+          <th>S.No</th>
+          <th>Customer ID</th>
+          <th>Loan Amount</th>
+          <th>Trade Date</th>
+          <th>Loan Start Date</th>
+          <th>Maturity Date</th>
+          <th>Payment Term</th>
+          <th>Payment Frequency</th>
+          <th>Interest Rate</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of displayLoan| paginate :{itemsPerPage:5,currentPage:p};index as i">
+            <td><a [routerLink]="['/displayPaymentSchedule',item.customerId]">{{i+1}} </a> </td>
+            <td> {{item.customerId}}</td>
+            <td> {{item.loanAmount}} </td>
+            <td> {{item.tradeDate}} </td>
+             <td> {{item.loanStartDate}} </td>
+            <td> {{item.maturityDate}} Months</td>
+            <td> <h5><span
+              [ngClass]="{
+                'badge':true,
+                'badge-pill':true,
+                'badge-success':item.paymentTerm.toUpperCase()==='Even Principal',
+                'badge-warning':item.paymentTerm.toUpperCase()==='Interest only'
+              }"  
+              style="padding: 8px;"
+          >{{item.paymentTerm}}</span></h5>  </td> 
+            <td> {{item.paymentFrequency}} Months </td>
+            <td> {{item.interestRate}}% </td>
+          </tr>
+        </tbody>
+      </table>   
+    </div>
+    &nbsp; &nbsp; <button class="back" role="button" (click)="onBack()">Back</button>
+      <pagination-controls (pageChange)="p = $event" style="float:right ;"></pagination-controls>
