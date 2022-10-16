@@ -1,10 +1,45 @@
-package com.finzly.loan.ExceptionHandleR;
+package com.finzly.loan.ExceptionHandler;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+public class ErrorResponse {
+		private int statusCode;
+	    private String message;
+	 
+	    public ErrorResponse() {
+			super();
+		}
 
-//@ControllerAdvice
-//public class Exceptionhandler {
-	//@ExceptionHandler(empty)
-	//public Responsee
-	//}
+		public ErrorResponse(int statusCode, String message) {
+			super();
+			this.statusCode = statusCode;
+			this.message = message;
+		}
+
+		public ErrorResponse(String message)
+	    {
+	        super();
+	        this.message = message;
+	    }
+
+		public int getStatusCode() {
+			return statusCode;
+		}
+
+		public void setStatusCode(int statusCode) {
+			this.statusCode = statusCode;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+
+		@Override
+		public String toString() {
+			return "ErrorResponse [statusCode=" + statusCode + ", message=" + message + "]";
+		}
+		
+	
+}
