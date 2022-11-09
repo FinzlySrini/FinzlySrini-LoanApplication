@@ -22,6 +22,11 @@ export class CreateLoanComponent implements OnInit {
   PaymentTerm:any[]=[
     "Interest Only", "Even Principal"
   ]
+
+  EMAIL_PATTERN =
+    '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@' +
+    '[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
+
   constructor(private service:HttpService,
               private router:Router) { }
 
@@ -37,6 +42,8 @@ export class CreateLoanComponent implements OnInit {
       paymentTerm:f.value.paymentTerm,
       paymentFrequency:f.value.paymentFreq,
       interestRate:f.value.interestRate,
+      email:f.value.email,
+      customerName:f.value.customerName
     }
     this.service.CreateLoan(obj)
     .subscribe((response)=>{
@@ -47,7 +54,7 @@ export class CreateLoanComponent implements OnInit {
     }  
   }
 
-  onBack(){
+  onExit(){
   this.router.navigate(["/"])
   }
 

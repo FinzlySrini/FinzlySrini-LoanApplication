@@ -21,7 +21,8 @@ import { AllLoansComponent } from './all-loans/all-loans.component';
     DisplayPaymentScheduleComponent,
     PageNotFoundComponent,
     CardComponent,
-    AllLoansComponent
+    AllLoansComponent,
+    
   ],
   imports: [
     BrowserModule,

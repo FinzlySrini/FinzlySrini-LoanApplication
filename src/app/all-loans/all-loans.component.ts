@@ -27,7 +27,7 @@ export class AllLoansComponent implements OnInit {
     })
   }
 
-  onBack(){
+  onExit(){
     this.router.navigate(['/'])
     }
 

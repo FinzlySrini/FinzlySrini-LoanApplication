@@ -37,20 +37,22 @@ onBack(){
   this.router.navigate(['/allLoans'])
   }
 
-onPay(paymentId:any){
+onExit(){
+    this.router.navigate([''])
+    }
 
-this.service.paymentStatus(paymentId)
+onPay(paymentId:any){
+if(confirm("Do you want to Pay?")){
+  this.service.paymentStatus(paymentId)
 .subscribe((res)=>{
-  if(confirm("Do you want to Pay?")){
 this.toaster.success(res,"Payment Success!");
 this.isDisable=false;
 location.reload();
-
-  }
-  else{
-this.toaster.warning("Payment has been cancelled","Payment Cancelled")
-  }
 })
+}
+else{
+  this.toaster.warning("Payment has been cancelled","Payment Cancelled")
+    }
 }
 
 }

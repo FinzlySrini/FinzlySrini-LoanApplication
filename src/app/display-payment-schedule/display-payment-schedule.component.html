@@ -1,6 +1,5 @@
-
-
-<table class="table table-bordered table-hover" >
+<h1 class="text-center">PAYMENT SCHEDULE</h1>
+<table style="top:15%;" class="table table-bordered table-hover" >
     <thead class="table-primary">
       <th>S.No</th>
       <th>Payment Id</th>
@@ -9,13 +8,13 @@
       <th>Payment Status</th>
       <th>Principal Amount</th>
       <th>Projected Interest</th>
-      <th>Payment</th>
+      <th >Payment</th>
     </thead>
     <tbody>
       <tr *ngFor="let item of PaymentSchedule | paginate :{itemsPerPage:5,currentPage:p},index as i">
         <td>{{i+1}}</td>
         <td> {{item.paymentId}}</td>
-        <td> {{item.paymentAmount}} </td>
+        <td> {{item.paymentAmount | currency : "INR"}} </td>
         <td> {{item.paymentDate}} </td>
         <td style="text-align: center;"><span [ngClass]="{
           'badge':true,
@@ -24,13 +23,49 @@
           'badge-danger':item.paymentStatus==='AWAITINGPAYMENT',
           'badge-warning':item.paymentStatus==='PROJECTED'
         }" style="padding: 5px;">{{item.paymentStatus}}</span></td>
-        <td> {{item.principalAmount}} </td>
-        <td> {{item.projectedInterest}} </td>
-        <td><button (click)="onPay(item.paymentId)" class="btn btn-success"
-         [disabled]='(item.paymentStatus === "PAID")'>Pay</button></td>
-        <td></td>
+        <td> {{item.principalAmount | currency : "INR"}}  </td>
+        <td>  {{item.projectedInterest | currency : "INR"}} </td>
+
+
+
+        <td class="payButon"> <link rel="stylesheet" href="display-payment-schedule.component.css">
+          <body>
+            <div class="container">
+          <button type="submit" (click)="onPay(item.paymentId)" class="btn btn-success btnCls"
+         [disabled]='(item.paymentStatus === "PAID")' onclick="openPopup()">Pay</button>
+         <div class="popup" id="popup">
+          <img src="../../assets/ok.png" >
+          <h2>Thank You!</h2>
+          <p>Payment has been Success </p>
+          <button type="button" onclick="closePopup()">OK</button>
+         </div>
+        </div>
+        <script>
+          let popup = document.getElementById("popup");
+          function openPopup(){
+            popup.classList.add("open-popup");
+          }
+          function closePopup(){
+            popup.classList.remove("open-popup");
+          }
+        </script>
+        </body>
+        </td> 
+
+
+         <!-- loading -->
+         <div class="center">
+          <div id="loading" class="loading1"></div>
+          <div id="loading" class="loading2"></div>
+          <div id="loading" class="loading3"></div>
+         </div>
       </tr>
+
+
+      
     </tbody>
   </table>   
-  &nbsp; &nbsp; <button class="back" role="button" (click)="onBack()">Back</button>
+  &nbsp; &nbsp; <button class="back" role="button" (click)="onBack()">Back</button> &nbsp; &nbsp;
+  &nbsp; &nbsp; <button class="back" role="button" (click)="onExit()">Exit</button>
+   <a href="mailto:gsrinivasan070@gmail.com?subject=Feedback&Body=Write your message here"> email us</a> to send Feedback
   <pagination-controls (pageChange)="p = $event" style="float:right ;"></pagination-controls>

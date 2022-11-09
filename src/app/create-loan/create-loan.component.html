@@ -5,15 +5,38 @@
         <h3>Creat new Loan</h3>
                   <mat-form-field appearance="outline" class="myclass" [color]="'accent'">
                     <mat-label>Loan Amount</mat-label>
-                    <input matInput type="number" placeholder="Enter the Loan Amount" min="1"
+                    <input matInput type="number" placeholder="Enter the Loan Amount" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" min="100" max="10000000"
                        #loanAmount="ngModel" ngModel 
                        name="loanAmount"        
                        required >
                 </mat-form-field>  <br><br>
-                <mat-error *ngIf="loanAmount.touched && !loanAmount.valid">Please select the Loan Amount</mat-error>
+                <mat-error *ngIf="loanAmount.touched && !loanAmount.valid">Please Enter the Loan Amount</mat-error>
 
-  
-  <!-- loan start date --> 
+<!-- Customer name -->
+                
+                <mat-form-field appearance="outline" class="myclass" [color]="'accent'">
+                  <mat-label>Customer name</mat-label>
+                  <input matInput type="text" placeholder="eg:Srini"  
+                     #customerName="ngModel" ngModel 
+                     name="customerName"        
+                     required >
+              </mat-form-field>  <br><br>
+              <mat-error *ngIf="customerName.touched && !customerName.valid">Please Enter the valid customer Name</mat-error>
+
+
+<!-- email -->
+
+                <mat-form-field appearance="outline" class="myclass" [color]="'accent'">
+                  <mat-label>Email</mat-label>
+                  <input matInput type="email" placeholder="Enter the email"  [pattern]="EMAIL_PATTERN"
+                     #email="ngModel" ngModel 
+                     name="email"        
+                     required >
+              </mat-form-field>  <br><br>
+              <mat-error *ngIf="email.touched && !email.valid">Please Enter the valid email</mat-error>
+
+
+<!-- loan start date --> 
   <mat-form-field class="myclass">
     <mat-label>Select Loan Start Date</mat-label>
     <mat-select required #loanStartDate="ngModel" name="loanStartDate" ngModel>
@@ -26,7 +49,8 @@
 <mat-error *ngIf="loanStartDate.touched && !loanStartDate.valid">Please select the Loan Start Date</mat-error>
 
 
-  <!-- maturity months -->
+ <!-- maturity months -->
+
                <mat-form-field class="myclass">
                   <mat-label>Select Maturity Months</mat-label>
                   <mat-select required #maturityMonths="ngModel" name="maturityMonths" ngModel>
@@ -38,7 +62,8 @@
               </mat-form-field> <br><br>
               <mat-error *ngIf="maturityMonths.touched && !maturityMonths.valid">Please select the Maturity Months</mat-error> 
             
-  <!-- payment term -->
+<!-- payment term -->
+
   <mat-form-field class="myclass">
     <mat-label>Select Payment term</mat-label>
     <mat-select required #paymentTerm="ngModel" name="paymentTerm" ngModel>
@@ -51,7 +76,8 @@
 <mat-error *ngIf="paymentTerm.touched && !paymentTerm.valid">Please select the Payment term</mat-error> 
 
   
-  <!-- payment Frequency -->
+<!-- payment Frequency -->
+
   <mat-form-field class="myclass">
     <mat-label>Select Payment Frequency</mat-label>
     <mat-select required #paymentFreq="ngModel" name="paymentFreq" ngModel>
@@ -62,17 +88,18 @@
 <mat-error *ngIf="paymentFreq.touched && !paymentFreq.valid">Please select the Payment Frequency</mat-error>
 
 
-  <!-- intrest rate -->
+<!-- intrest rate -->
+
               <mat-form-field appearance="outline" class="myclass" [color]="'accent'">
                   <mat-label>Interest Rate </mat-label>
                   <input matInput type="number" placeholder="Enter the Interest Rate"
-                    #interestRate="ngModel" ngModel min="0.1" max="100"
+                    #interestRate="ngModel" ngModel step="0.01" pattern="^\d+(?:\.\d{1,2})?$" min="0.1" max="100"
                     name="interestRate"        
                     required>
                     <mat-error *ngIf="interestRate.touched && !interestRate.valid"> Please Enter the Interest Rate</mat-error>
                 </mat-form-field>
               <button mat-raised-button color="accent"  [disabled]="!f.valid">Submit</button> <br> <br>
-              <button class="back" role="button" (click)="onBack()">Back</button>
+              <button class="back" role="button" (click)="onExit()"> Exit</button>
           </form>
         </div>
       </div>
